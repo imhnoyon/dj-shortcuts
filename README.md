@@ -1,171 +1,206 @@
-# Django Shortcut
+# Django Shortcut (`django-shortcut`)
 
-A command-line tool for bootstrapping a production-ready Django REST Framework project.
+[![PyPI version](https://img.shields.io/pypi/v/django-shortcut.svg?color=blue)](https://pypi.org/project/django-shortcut/)
+[![Python versions](https://img.shields.io/pypi/pyversions/django-shortcut.svg)](https://pypi.org/project/django-shortcut/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-## Features
+A powerful, light-weight Command-Line Interface (CLI) tool to bootstrap a production-ready **Django REST Framework (DRF)** project in seconds. 
 
-- Creates a Python virtual environment
-- Installs Django and Django REST Framework
-- Configures JWT Authentication
-- Creates a `.env` file
-- Configures CORS, Static, and Media settings
-- Runs initial database migrations
-- Initializes a Git repository
-- Generates a `requirements.txt` file
+This tool automates the tedious setup tasks—such as configuring virtual environments, installing dependencies, writing `.env` files, setting up CORS, and configuring JSON Web Token (JWT) authentication—so you can focus on writing your API endpoints immediately.
 
-## Requirements
+---
 
-- Python 3.8+
-- Git (optional, for repository initialization)
+## 🚀 Features
 
-## Installation
+- 🐍 **Automatic Virtual Environment (`venv`)**: Installs, configures, and upgrades `pip`, `setuptools`, and `wheel` inside the local environment.
+- 📦 **Pre-configured Dependencies**: Installs `django`, `djangorestframework`, `djangorestframework-simplejwt`, `django-cors-headers`, `django-environ`, and `pillow` automatically.
+- ⚙️ **Production-Ready `settings.py`**: Out-of-the-box support for `.env` loading, CORS configuration, database connection environment variables, and media/static root configurations.
+- 🔐 **Pre-configured JWT Auth**: Pre-integrated JWT auth settings using `djangorestframework-simplejwt`.
+- 🔧 **Git Integration**: Initializes a Git repository and writes a comprehensive `.gitignore` file.
+- 🐳 **Dependency Locking**: Auto-generates a `requirements.txt` file based on the local virtualenv state.
+- 📚 **Tailored Documentation**: Generates a project-specific `README.md` inside your new project folder with instructions to run and scale.
 
-Install from PyPI:
+---
+
+## 📋 Requirements
+
+- **Python**: Version `3.8` or higher
+- **Git**: Installed and configured (optional, for repository initialization)
+
+---
+
+## ⚙️ Installation
+
+Install the package directly from PyPI:
 
 ```bash
 pip install django-shortcut
 ```
 
-Verify the installation:
+To verify the installation:
 
 ```bash
 dj-shortcuts --help
 ```
 
-## Usage
+---
 
-Create a new project:
+## 🛠️ Usage & Quick Start
+
+Create a new Django REST Framework project using a single command:
 
 ```bash
 dj-shortcuts <project_name>
 ```
 
-Example:
+### Examples
 
+**Basic Project Initialization:**
 ```bash
 dj-shortcuts ecommerce_api
 ```
 
-Create a project in a custom directory:
-
+**Generate Project in a Custom Directory:**
 ```bash
-dj-shortcuts ecommerce_api --target C:\Projects
+dj-shortcuts ecommerce_api --target C:\Projects\ecommerce_api
 ```
+*(or use the shorthand: `-t C:\Projects\ecommerce_api`)*
 
-or
+---
 
-```bash
-dj-shortcuts ecommerce_api -t C:\Projects
-```
+## 💡 Alternative Invocation (Windows PATH Troubleshooting)
 
-## Alternative Usage
+If you get an error saying `'dj-shortcuts' is not recognized as an internal or external command`, it means Python's user scripts folder is not in your system **PATH** variable.
 
-If the CLI command is unavailable (for example, if your Python Scripts directory is not in your system `PATH`), run the module directly:
+You can run the generator module directly using Python without changing system variables:
 
 ```bash
 python -m django_shortcuts.cli <project_name>
 ```
 
-Example:
-
+**Example:**
 ```bash
 python -m django_shortcuts.cli ecommerce_api
 ```
 
-## Generated Project
+---
 
-The generated project includes:
+## 📁 Generated Project Structure
 
-- Python virtual environment
-- Django project structure
-- Django REST Framework
-- JWT Authentication
-- CORS configuration
-- Environment variable support
-- Static and Media configuration
-- Git repository
-- `requirements.txt`
+When you create a project, the following directory tree is generated:
 
-## After Project Creation
+```text
+my_project_name/
+├── venv/                 # Python Virtual Environment
+├── my_project_name/      # Django Settings Directory
+│   ├── __init__.py
+│   ├── asgi.py
+│   ├── settings.py       # Fully preconfigured DRF/JWT settings
+│   ├── urls.py           # Preconfigured with static/media routing
+│   └── wsgi.py
+├── .env                  # Pre-populated secret key & db environment variables
+├── .gitignore            # Complete Python and Django Git excludes
+├── manage.py
+├── requirements.txt      # Installed dependencies pinned versions
+└── README.md             # Running instructions specific to your project
+```
 
-Navigate to the project directory:
+---
 
+## 🏃‍♂️ Step-by-Step Post-Creation Guide
+
+Once your project is created, follow these steps to run your development server:
+
+### 1. Navigate to the project directory
 ```bash
 cd ecommerce_api
 ```
 
-Activate the virtual environment.
+### 2. Activate the virtual environment
+- **On Windows (PowerShell):**
+  ```powershell
+  venv\Scripts\Activate.ps1
+  ```
+- **On Windows (CMD):**
+  ```cmd
+  venv\Scripts\activate.bat
+  ```
+- **On macOS/Linux:**
+  ```bash
+  source venv/bin/activate
+  ```
 
-**Windows**
-
-```bash
-venv\Scripts\activate
-```
-
-**Linux/macOS**
-
-```bash
-source venv/bin/activate
-```
-
-Start the development server:
-
+### 3. Start the Development Server
 ```bash
 python manage.py runserver
 ```
 
-Visit:
+Now, visit:
+- **API root:** [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
+- **Admin Panel:** [http://127.0.0.1:8000/admin/](http://127.0.0.1:8000/admin/)
 
-```
-http://127.0.0.1:8000/
-```
-
-Admin panel:
-
-```
-http://127.0.0.1:8000/admin/
-```
-
-## Updating
-
-Upgrade to the latest version:
-
+### 4. Create a Superuser
+To log in to the admin panel, create a new administrative user:
 ```bash
-pip install --upgrade django-shortcut
+python manage.py createsuperuser
 ```
 
-## Troubleshooting
+---
 
-### Command not found
+## 🛠️ Local Development & Testing
 
-If you receive:
+To run or test `django-shortcut` on your local system:
 
-```text
-'dj-shortcuts' is not recognized as an internal or external command
-```
+1. Clone this repository:
+   ```bash
+   git clone https://github.com/imhnoyon/dj-shortcuts.git
+   cd dj-shortcuts
+   ```
+2. Install the package in editable mode:
+   ```bash
+   pip install -e .
+   ```
+   *Any changes you make to the source code will immediately reflect when you run `dj-shortcuts`.*
 
-Run the CLI directly:
+---
 
+## 📦 How to Publish to PyPI
+
+If you want to package and upload this tool to your own PyPI account:
+
+### 1. Install Build and Twine
 ```bash
-python -m django_shortcuts.cli <project_name>
+pip install build twine
 ```
 
-Alternatively, add your Python **Scripts** directory to your system `PATH`.
+### 2. Build the Distribution Archives
+Run the builder from the project root (where `pyproject.toml` is located):
+```bash
+python -m build
+```
+*This generates a source distribution (`.tar.gz`) and a built wheel (`.whl`) inside the `dist/` directory.*
 
-## Repository
+### 3. Upload to PyPI
+Upload your packaged distribution using Twine:
+```bash
+python -m twine upload dist/*
+```
+*Enter your PyPI token when prompted.*
 
-GitHub:
+---
 
-https://github.com/ihmnoyon/django-shortcut
+## 📄 License
 
-## License
+This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for more information.
 
-Released under the MIT License.
+---
 
-## Author
+## 👤 Author & Support
 
-**Mahedi Hasan Noyon**
+Developed with ❤️ by **Mahedi Hasan Noyon**.
 
-- GitHub: https://github.com/imhnoyon/
-- Portfolio: https://mahed.pythonanywhere.com/
-- Email: mahedi.dev2002@gmail.com
+- **GitHub Profile**: [imhnoyon](https://github.com/imhnoyon)
+- **Developer Portfolio**: [mahed.pythonanywhere.com](https://mahed.pythonanywhere.com/)
+- **Email Address**: [mahedi.dev2002@gmail.com](mailto:mahedi.dev2002@gmail.com)
+
+If you find this tool helpful, please give a ⭐️ to the [GitHub Repository](https://github.com/imhnoyon/dj-shortcuts)!

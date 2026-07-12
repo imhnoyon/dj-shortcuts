@@ -1,88 +1,171 @@
-# Django Shortcut (`django-shortcut`)
+# Django Shortcut
 
-A command-line tool to initialize a production-ready Django REST Framework (DRF) project with a single command. 
-
-This tool automates the process of setting up a virtual environment, installing essential dependencies, configuring standard environment variables with `.env`, and establishing base configurations.
-
----
+A command-line tool for bootstrapping a production-ready Django REST Framework project.
 
 ## Features
 
-- 🐍 **Virtual Environment (`venv`)**: Automatically sets up, activates, and upgrades `pip`/`setuptools`/`wheel`.
-- 📦 **Automated Dependencies**: Installs `django`, `djangorestframework`, `djangorestframework-simplejwt`, `django-cors-headers`, `django-environ`, and `pillow`.
-- ⚙️ **Configured settings.py**: Environment variable support with `.env` loading, integrated CORS headers, preconfigured static/media root directories, and standard environment-based database configuration.
-- 🔐 **Authentication**: Out-of-the-box JWT configuration with `djangorestframework-simplejwt`.
-- 🔧 **Git Integration**: Initializes a Git repository and sets up a standard `.gitignore` file.
-- 📚 **Generated Documentation**: Provides a tailored `README.md` inside your new project folder with instructions to run and test.
+- Creates a Python virtual environment
+- Installs Django and Django REST Framework
+- Configures JWT Authentication
+- Creates a `.env` file
+- Configures CORS, Static, and Media settings
+- Runs initial database migrations
+- Initializes a Git repository
+- Generates a `requirements.txt` file
 
----
+## Requirements
+
+- Python 3.8+
+- Git (optional, for repository initialization)
 
 ## Installation
 
-You can install `django-shortcut` directly from PyPI:
+Install from PyPI:
 
 ```bash
 pip install django-shortcut
 ```
 
----
+Verify the installation:
+
+```bash
+dj-shortcuts --help
+```
 
 ## Usage
 
-Create a new Django DRF project in a single command:
+Create a new project:
 
 ```bash
-dj-shortcuts my_project_name
+dj-shortcuts <project_name>
 ```
-*(or `django-shortcuts my_project_name`)*
 
-### Options
+Example:
 
-- `project_name` (Required): The name of your new Django project. Must be a valid Python identifier (no hyphens `-` or dots `.`).
-- `-t`, `--target` (Optional): Specify a custom folder path where you want the project created. If not provided, it creates a folder named after the project in your current directory.
-
-**Example:**
 ```bash
-dj-shortcuts ecommerce_api -t C:\Users\mahed\Documents\projects\ecommerce_api
+dj-shortcuts ecommerce_api
 ```
 
----
+Create a project in a custom directory:
+
+```bash
+dj-shortcuts ecommerce_api --target C:\Projects
+```
+
+or
+
+```bash
+dj-shortcuts ecommerce_api -t C:\Projects
+```
+
+## Alternative Usage
+
+If the CLI command is unavailable (for example, if your Python Scripts directory is not in your system `PATH`), run the module directly:
+
+```bash
+python -m django_shortcuts.cli <project_name>
+```
+
+Example:
+
+```bash
+python -m django_shortcuts.cli ecommerce_api
+```
+
+## Generated Project
+
+The generated project includes:
+
+- Python virtual environment
+- Django project structure
+- Django REST Framework
+- JWT Authentication
+- CORS configuration
+- Environment variable support
+- Static and Media configuration
+- Git repository
+- `requirements.txt`
+
+## After Project Creation
+
+Navigate to the project directory:
+
+```bash
+cd ecommerce_api
+```
+
+Activate the virtual environment.
+
+**Windows**
+
+```bash
+venv\Scripts\activate
+```
+
+**Linux/macOS**
+
+```bash
+source venv/bin/activate
+```
+
+Start the development server:
+
+```bash
+python manage.py runserver
+```
+
+Visit:
+
+```
+http://127.0.0.1:8000/
+```
+
+Admin panel:
+
+```
+http://127.0.0.1:8000/admin/
+```
+
+## Updating
+
+Upgrade to the latest version:
+
+```bash
+pip install --upgrade django-shortcut
+```
 
 ## Troubleshooting
 
-### Windows: Command not recognized
-If you run `dj-shortcuts` and get the error:
-`'dj-shortcuts' is not recognized as an internal or external command...`
+### Command not found
 
-This means Python's user scripts folder is not in your system **PATH** variable. You can solve this in two ways:
+If you receive:
 
-#### Option A: Run directly with Python (Immediate)
-You can bypass the PATH configuration by invoking the module directly:
-```bash
-python -m django_shortcuts.cli my_project_name
+```text
+'dj-shortcuts' is not recognized as an internal or external command
 ```
 
-#### Option B: Add Python Scripts directory to your PATH
-1. Search for **"Edit the system environment variables"** in the Windows Search Bar.
-2. Click **Environment Variables...**.
-3. Under **User variables**, select **`Path`** and click **Edit**.
-4. Click **New** and add your Python scripts folder (usually `C:\Users\<YourUsername>\AppData\Roaming\Python\Python314\Scripts` or similar).
-5. Click **OK** to save, restart your terminal, and run `dj-shortcuts` again.
+Run the CLI directly:
 
----
+```bash
+python -m django_shortcuts.cli <project_name>
+```
 
-## Local Installation & Development
+Alternatively, add your Python **Scripts** directory to your system `PATH`.
 
-To develop and test `django-shortcut` locally:
+## Repository
 
-1. Clone or download this repository.
-2. Install the package in editable mode from the project root:
-   ```bash
-   pip install -e .
-   ```
+GitHub:
 
----
+https://github.com/ihmnoyon/django-shortcut
 
 ## License
 
-This project is licensed under the MIT License.
+Released under the MIT License.
+
+## Author
+
+**Mahedi Hasan Noyon**
+
+- GitHub: https://github.com/imhnoyon/
+- Portfolio: https://mahed.pythonanywhere.com/
+- Email: mahedi.dev2002@gmail.com
